@@ -1,0 +1,26 @@
+name: Unzip NutriTrack.zip
+
+# Trigger workflow only when NutriTrack.zip is uploaded or updated
+on:
+  push:
+    paths:
+      - 'NutriTrack.zip'
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Unzip NutriTrack.zip
+    - name: Unzip NutriTrack.zip
+      run: |
+        mkdir -p unzipped_nutritrack
+        unzip NutriTrack.zip -d unzipped_nutritrack
+
+    # Step 3: List all unzipped files
+    - name: List unzipped files
+      run: ls -R unzipped_nutritrack
